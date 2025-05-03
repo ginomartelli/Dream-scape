@@ -1,4 +1,5 @@
 ![title image]()
+
 *A 3D browser game where you must collect 12 orbs hidden across a surreal dream world to escape before morning.*  
 Built with **Babylon.js** and **JavaScript** for the **Games On Web 2025** contest.
 
@@ -13,9 +14,11 @@ Built with **Babylon.js** and **JavaScript** for the **Games On Web 2025** conte
 ## 🧭 TABLE OF CONTENTS
 - # [🇬🇧 English version](#🇬🇧-english-version)
   - [Game Overview](#🎮-game-overview)
+  - [⚙️ Functionality and Options]()
   - [Team Presentation](#👥-team-presentation)
 - # [🇫🇷 Version française](#🇫🇷-version-française)
   - [Description du jeu](#🎮-description-du-jeu)
+  - [⚙️ Fonctionnement et options]()
   - [Présentation de l'équipe](#👥-présentation-de-léquipe)
 
 ## 🇬🇧 English version
@@ -36,7 +39,22 @@ Once all 12 orbs are collected, the **escape portal** will open. Will you make i
 ⎋ *Press ESC or click again to show the mouse.*  
 ⚠️ *Using a laptop? Plug it in for smoother gameplay.*
 
----
+## ⚙️ Functionality and Options
+
+### 🎮 Controls
+- **ZQSD** — Move around  
+- **SPACE** — Jump  
+- **SHIFT** — Run  
+- **Mouse** — Look around  
+- **Mouse Wheel** — Zoom in/out  
+
+### 📋 In-Game Menu Options
+- **STYLE** — Change your character’s appearance  
+- **CONTROLS** — Customize key bindings and mouse sensitivity  
+- **CHECKPOINT** — Teleport instantly to any unlocked checkpoint  
+- **SOUND** — Adjust volume and toggle music/sound effects  
+- **HELP** — Show gameplay instructions  
+- **PAUSE** — Pause the game  
 
 ### 👥 Team Presentation  
 We are three students from **Polytech Nice Sophia**, currently in our **first year of engineering cycle**.  
@@ -62,7 +80,22 @@ Une fois les 12 orbes récupérées, le **portail d’éveil** apparaîtra. Sere
 ⎋ *Pressez ECHAP ou cliquez à nouveau pour afficher le curseur.*  
 ⚠️ *Si vous jouez sur un PC portable, branchez-le sur secteur pour de meilleures performances.*
 
----
+## ⚙️ Fonctionnement et options
+
+### 🎮 Contrôles
+- **ZQSD** — Se déplacer  
+- **ESPACE** — Sauter  
+- **SHIFT** — Courir  
+- **Souris** — Regarder autour de soi  
+- **Molette de la souris** — Zoomer/dézoomer  
+
+### 📋 Menu du jeu
+- **STYLE** — Changer l'apparence du personnage  
+- **CONTROLS** — Modifier les touches et la sensibilité de la souris  
+- **CHECKPOINT** — Se téléporter à n’importe quel checkpoint débloqué  
+- **SOUND** — Régler le son ou couper musique/effets sonores  
+- **HELP** — Afficher les instructions du jeu  
+- **PAUSE** — Mettre le jeu en pause  
 
 ### 👥 Présentation de l’équipe  
 Nous sommes **trois étudiants** à **Polytech Nice Sophia**, actuellement en **première année de cycle ingénieur**.  
