@@ -33,7 +33,7 @@ To wake up and escape the dream, you must:
 Once all 12 orbs are collected, the **escape portal** will open. Will you make it out before morning?
 
 🖱️ *Click anywhere on the screen to control the camera (your cursor will disappear).*  
-⎋ *Press ESC or click again to show the mouse again.*  
+⎋ *Press ESC or click again to show the mouse.*  
 ⚠️ *Using a laptop? Plug it in for smoother gameplay.*
 
 ---
@@ -59,7 +59,7 @@ Pour vous échapper de ce cauchemar, vous devrez :
 Une fois les 12 orbes récupérées, le **portail d’éveil** apparaîtra. Serez-vous assez rapide pour vous réveiller à temps ?
 
 🖱️ *Cliquez sur l’écran pour regarder autour de vous (le curseur disparaîtra).*  
-⎋ *Appuyez sur Échap pour afficher à nouveau le curseur.*  
+⎋ *Pressez ECHAP ou cliquez à nouveau pour afficher le curseur.*  
 ⚠️ *Si vous jouez sur un PC portable, branchez-le sur secteur pour de meilleures performances.*
 
 ---
@@ -67,5 +67,3 @@ Une fois les 12 orbes récupérées, le **portail d’éveil** apparaîtra. Sere
 ### 👥 Présentation de l’équipe  
 Nous sommes **trois étudiants** à **Polytech Nice Sophia**, actuellement en **première année de cycle ingénieur**.  
 Ce projet est notre participation au concours **Games On Web 2025**.
-
-## 🔙 [Retourner au sommaire](#🧭-sommaire)
