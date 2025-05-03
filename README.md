@@ -9,7 +9,6 @@ Built with **Babylon.js** and **JavaScript** for the **Games On Web 2025** conte
 - ## [🎞️ Trailer](#)
 - ## [📁 Source Code](https://github.com/ginomartelli/Dream-scape)
 
----
 
 ## 🧭 TABLE OF CONTENTS
 - ### [🇬🇧 English version](#🇬🇧-english-version)
@@ -20,6 +19,8 @@ Built with **Babylon.js** and **JavaScript** for the **Games On Web 2025** conte
   - #### [🎮 Description du jeu](#🎮-description-du-jeu)
   - #### [⚙️ Fonctionnement et options]()
   - #### [👥 Présentation de l'équipe](#👥-présentation-de-léquipe)
+
+---
 
 ## 🇬🇧 English version
 
