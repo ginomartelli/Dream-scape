@@ -12,12 +12,11 @@ Built with **Babylon.js** and **JavaScript** for the **Games On Web 2025** conte
 
 ## 🧭 TABLE OF CONTENTS
 - # [🇬🇧 English version](#🇬🇧-english-version)
-  - # [Game Overview](#🎮-game-overview)
-  - # [Team Presentation](#👥-team-presentation)
+  - [Game Overview](#🎮-game-overview)
+  - [Team Presentation](#👥-team-presentation)
 - # [🇫🇷 Version française](#🇫🇷-version-française)
-  - # [Description du jeu](#🎮-description-du-jeu)
-  - # [Présentation de l'équipe](#👥-présentation-de-léquipe)
----
+  - [Description du jeu](#🎮-description-du-jeu)
+  - [Présentation de l'équipe](#👥-présentation-de-léquipe)
 
 ## 🇬🇧 English version
 
