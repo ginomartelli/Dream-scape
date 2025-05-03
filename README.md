@@ -2,21 +2,21 @@
 *A 3D browser game where you must collect 12 orbs hidden across a surreal dream world to escape before morning.*  
 Built with **Babylon.js** and **JavaScript** for the **Games On Web 2025** contest.
 
-##  
-- [🎮 Play the Game](#)
-- [🔎 Presentation Video](#)
-- [🎞️ Trailer](#)
-- [📁 Source Code](https://github.com/ginomartelli/Dream-scape)
+# ⏰ ESCAPE BEFORE IT'S TOO LATE!
+- ## [🎮 Play the Game](#)
+- ## [🔎 Presentation Video](#)
+- ## [🎞️ Trailer](#)
+- ## [📁 Source Code](https://github.com/ginomartelli/Dream-scape)
 
 ---
 
 ## 🧭 TABLE OF CONTENTS
-- [🇬🇧 English version](#🇬🇧-english-version)
-  - [Game Overview](#🎮-game-overview)
-  - [Team Presentation](#👥-team-presentation)
-- [🇫🇷 Version française](#🇫🇷-version-française)
-  - [Description du jeu](#🎮-description-du-jeu)
-  - [Présentation de l'équipe](#👥-présentation-de-léquipe)
+- # [🇬🇧 English version](#🇬🇧-english-version)
+  - # [Game Overview](#🎮-game-overview)
+  - # [Team Presentation](#👥-team-presentation)
+- # [🇫🇷 Version française](#🇫🇷-version-française)
+  - # [Description du jeu](#🎮-description-du-jeu)
+  - # [Présentation de l'équipe](#👥-présentation-de-léquipe)
 ---
 
 ## 🇬🇧 English version
