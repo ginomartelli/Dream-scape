@@ -4,7 +4,7 @@
 Built with **Babylon.js** and **JavaScript** for the **Games On Web 2025** contest.
 
 # ⏰ ESCAPE BEFORE IT'S TOO LATE!
-- ## [🎮 Play the Game](#)
+- ## [🎮 Play !](#)
 - ## [🔎 Presentation Video](#)
 - ## [🎞️ Trailer](#)
 - ## [📁 Source Code](https://github.com/ginomartelli/Dream-scape)
