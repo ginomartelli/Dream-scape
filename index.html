@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css">
+    <title>DREAM'SCAPE</title>
+  </head>
+  <body>
+    <div id="backmenu">
+      <h1 class="title">DREAM'SCAPE
+        <div class="aurora">
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+        </div>
+      </h1>
+      <p id="buttonPlay" class="buttonText">Play.</p><br>
+      <p class="buttonText"><a href="https://github.com/ginomartelli/Dream-scape/blob/main/README.md">GitHub.</a></p>
+    </div>
+    <div id="loading" class="hide">
+      <h1 class="title">LOADING
+        <div class="aurora">
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+        </div>
+      </h1>
+      <div id="progress-bar-container">
+        <div id="progress-bar" class="title"></div>
+      </div>
+    </div>
+    <canvas id="renderCanvas" class="hide"></canvas>
+    <div id="blackScreen" class="hidden"></div>
+    <div id="helpUI" class="hidden">
+      <h2 class="buttonText actif">Welcome to DREAM'SCAPE</h2>
+      <p>
+        You're trapped in a dream... and class starts tomorrow morning!<br>
+        To escape this strange dream world, you must collect <strong>12 glowing orbs</strong> scattered across the land.<br>
+        Once you’ve found all 12, the portal will open… and you’ll finally be free to wake up.<br>
+        Good luck — <strong>time is running out!</strong><br><br>
+        For more information, check the<a class="buttonText" href="https://github.com/ginomartelli/Dream-scape/blob/main/README.md">GitHub.</a>
+      </p>
+      <div class="columns">
+        <div>
+          <h3 class="buttonText actif">How to Move Around</h3>
+          <p>
+            <strong>Z</strong> : Forward<br>
+            <strong>S</strong> : Backward<br>
+            <strong>Q</strong> : Left<br>
+            <strong>D</strong> : Right<br>
+            <strong>Space</strong> : Jump<br>
+            <strong>Shift</strong> : Run<br>
+          </p>
+        </div>
+        <div>
+          <h3 class="buttonText actif">How to Look Around</h3>
+          <p>
+          Click anywhere on the screen to control the camera and look around. Your mouse cursor will disappear.<br>
+          To show the cursor again, just press <strong>ESC</strong> or click again.<br>
+          Use the <strong>mouse wheel</strong> to zoom in and out<br><br>
+          Use <strong>CTRL</strong> and the <strong>mouse wheel</strong> to change the display quality.<br>
+          </p>
+        </div>
+      </div>
+      <div class="footer buttonText" id="buttonUI"><strong>Click here</strong> to close this message.</div>
+    </div>
+    <div id="endDiv" class="hidden">
+      <h1 class="title">YOU ESCAPED !
+        <div class="aurora">
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+        </div>
+      </h1>
+      <p>in <span id="timerResult"></span> !</p>
+      <p id="buttonKeepPlaying" class="buttonText">Continue.</p><br>
+      <p id="buttonReplay" class="buttonText">Replay.</p><br>
+      <p class="buttonText"><a href="https://github.com/ginomartelli/Dream-scape/blob/main/README.md">GitHub.</a></p>
+    </div>
+    <div id="looseDiv" class="hidden">
+      <h1 class="title">YOU FAILED !
+        <div class="aurora">
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+        </div>
+      </h1>
+      <p>Time's up ! You're already behind schedule for class.</p>
+      <p id="buttonKeepPlaying2" class="buttonText">Continue.</p><br>
+      <p id="buttonReplay2" class="buttonText">Retry.</p><br>
+      <p class="buttonText"><a href="https://github.com/ginomartelli/Dream-scape/blob/main/README.md">GitHub.</a></p>
+    </div>
+    <div id="pauseMenu" class="hidden">
+      <h1 class="title">PAUSE
+        <div class="aurora">
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+          <div class="aurora__item"></div>
+        </div>
+      </h1>
+      <p>Time left: <span id="timerPause"></span></p>
+      <p id="buttonResume" class="buttonText">Resume.</p><br>
+      <p id="buttonReplay3" class="buttonText">Retry.</p><br>
+      <p class="buttonText"><a href="https://github.com/ginomartelli/Dream-scape/blob/main/README.md">GitHub.</a></p>
+    </div>
+    <div id="timer" class="hidden">
+        <p id="timerValue"></p>
+    </div>
+    <div id="playMenu" class="hide">
+      <p id="buttonStyle" class="buttonText">Style.</p>
+      <p id="buttonControls" class="buttonText">Controls.</p>
+      <p id="buttonCheckpoints" class="buttonText">Checkpoints.</p>
+      <p id="buttonSound" class="buttonText">Sound.</p>
+      <p id="buttonHelp" class="buttonText">Help.</p>
+      <p id="buttonHome" class="buttonText">Pause.</p>
+      <div id="styleMenu" class="menu hidden">
+        <div id="linePadding"></div>
+        <div></div>
+        <div>
+          <input type="color" id="head" name="head" value="#5c311d" />
+          <label for="head">&nbsp;&nbsp;&nbsp;&nbsp;Hair&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="color" id="shirt" value="#574bd2" />
+          <label for="shirt">&nbsp;&nbsp;&nbsp;Shirt&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="color" id="backpack" value="#0f3e14" />
+          <label for="backpack">Backpack</label>
+        </div>
+        <div>
+          <input type="color" id="pants" value="#34246a" />
+          <label for="pants">&nbsp;&nbsp;&nbsp;Pants&nbsp;&nbsp;&nbsp;</label>
+        </div>
+        <div>
+          <input type="color" id="shoes" value="#000000" />
+          <label for="shoes">&nbsp;&nbsp;&nbsp;Shoes&nbsp;&nbsp;&nbsp;</label>
+        </div>
+      </div>
+      <div id="controlsMenu" class="menu hidden">
+        <div></div>
+        <div>
+          <button id="z" class="buttonText">Z</button>
+          <label for="z">Forward.</label>
+        </div>
+        <div>
+          <button id="q" class="buttonText">Q</button>
+          <label for="q">Left.</label>
+        </div>
+        <div>
+          <button id="s" class="buttonText">S</button>
+          <label for="s">Backward.</label>
+        </div>
+        <div>
+          <button id="d" class="buttonText">D</button>
+          <label for="d">Right.</label>
+        </div>
+        <div>
+          <button id="space" class="buttonText">Space</button>
+          <label for="space">Jump.</label>
+        </div>
+        <div>
+          <button id="shift" class="buttonText">Shift</button>
+          <label for="shift">Run.</label>
+        </div>
+        <div>
+          <label for="sensitivity" id="rangeValue2">Sensitivity : 0.25</label><br>
+          <input class="slider" type="range" id="sensitivity" step="0.01" min="0.05" max="1" value="0.25"/>
+        </div>
+      </div>
+      <div id="checkpointsMenu" class="menu hidden">
+      </div>
+      <div id="soundMenu" class="menu hidden">
+        <div></div>
+        <div>
+          <button id="buttonMute" class="buttonText">
+            <img src="images/speaker.png" alt="Mute/Unmute" />
+          </button>
+          <label for="buttonMute">Sound.</label>
+        </div>
+        <div>
+          <button id="buttonMuteMusic" class="buttonText">
+            <img src="images/musical-note.png" alt="Mute/Unmute Music" />
+          </button>
+          <label for="buttonMuteMusic">Music.</label>
+        </div>
+        <div>
+          <label for="volume" id="rangeValue1">Volume : 50</label><br>
+          <input class="slider" type="range" id="volume" step="1" min="0" max="100" value="50"/>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
