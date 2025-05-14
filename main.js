@@ -352,7 +352,7 @@ async function createScene(engine) {
         { position: new BABYLON.Vector3(-165, 77, 165), scale: 0.15 }, //chekpoint
         { position: new BABYLON.Vector3(-220, 0, 100), scale: 2 }, //final island
     ];
-    var base_island = (await SceneLoader.ImportMeshAsync("", "/models/", "island.glb", scene)).meshes[0];
+    var base_island = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "island.glb", scene)).meshes[0];
     islandPositions.forEach((islandPosition, index) => {
         let island = base_island.clone("island" + index);
         island.position = islandPosition.position;
@@ -378,7 +378,7 @@ async function createScene(engine) {
         { position: new BABYLON.Vector3(201.28, 0, -146.88), rotation: BABYLON.Angle.FromDegrees(-13.75).radians() }, 
         { position: new BABYLON.Vector3(13.3,0,274), rotation: 0 }, 
     ];
-    var bridge = (await SceneLoader.ImportMeshAsync("", "/models/", "bridge.glb", scene)).meshes[0]; 
+    var bridge = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "bridge.glb", scene)).meshes[0]; 
     bridge.scaling = new BABYLON.Vector3(2.5, 2.5, 2.5);
     bridge.rotationQuaternion = false;
     bridgePositions.forEach((bridgePosition, index) => {
@@ -410,7 +410,7 @@ async function createScene(engine) {
     bridge.dispose();
     progressBar.style.width = "4%"; //MAJ PROGRESS BAR
     /////////////////////////////////////////////////////// PLAYER
-    var player = await SceneLoader.ImportMeshAsync("", "/models/", "playerF5.glb", scene);
+    var player = await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "playerF5.glb", scene);
     var player_root = player.meshes[0];
     var player_backpack = player.meshes[1]; 
     var player_body = player.meshes[2];
@@ -562,7 +562,7 @@ async function createScene(engine) {
         {position: new BABYLON.Vector3(-262.49, 0, 76.44), rotation: 0.33, i: 3},{position: new BABYLON.Vector3(-268.37, 0, 112.88), rotation: 2.67, i: 1},{position: new BABYLON.Vector3(-242.08, 0, 138.97), rotation: 1.13, i: 4},{position: new BABYLON.Vector3(-210.34, 0, 145.63), rotation: 2.89, i: 5},{position: new BABYLON.Vector3(-185, -1.8, 118), rotation: 0.27, i: 2},{position: new BABYLON.Vector3(-183.24, 0, 95.02), rotation: 1.91, i: 3},{position: new BABYLON.Vector3(-196.85, 0, 70.41), rotation: 2.45, i: 1},{position: new BABYLON.Vector3(-221.09, 0, 53.82), rotation: 0.15, i: 5},{position: new BABYLON.Vector3(-248.96, 0, 59.04), rotation: 1.57, i: 4},{position: new BABYLON.Vector3(-264.42, 0, 90.77), rotation: 2.77, i: 3},{position: new BABYLON.Vector3(-252.28, 0, 121.33), rotation: 1.38, i: 2},{position: new BABYLON.Vector3(-226.47, 0, 137.41), rotation: 0.48, i: 1},{position: new BABYLON.Vector3(-178, -3.2, 127), rotation: 2.22, i: 5},{position: new BABYLON.Vector3(-186.32, 0, 93.84), rotation: 0.76, i: 3},{position: new BABYLON.Vector3(-198.43, 0, 65.27), rotation: 2.57, i: 2},{position: new BABYLON.Vector3(-223.81, 0, 50.11), rotation: 1.89, i: 4},{position: new BABYLON.Vector3(-249.05, 0, 65.85), rotation: 0.39, i: 1},{position: new BABYLON.Vector3(-263.17, 0, 96.43), rotation: 2.04, i: 5},
         {position: new BABYLON.Vector3(-215.12, 0, 148.75), rotation: 0.87, i: 3},{ position: new BABYLON.Vector3(-218.1, 0, 102.7), rotation: 1.42, i: 2 },{ position: new BABYLON.Vector3(-230.8, 0, 117.4), rotation: 0.67, i: 3 },{ position: new BABYLON.Vector3(-210.9, 0, 125.3), rotation: 2.51, i: 1 },{ position: new BABYLON.Vector3(-202.5, 0, 111.2), rotation: 1.89, i: 4 },{ position: new BABYLON.Vector3(-201.7, 0, 94.9), rotation: 0.91, i: 5 },{ position: new BABYLON.Vector3(-212.3, 0, 85.4), rotation: 2.17, i: 3 },{ position: new BABYLON.Vector3(-226.5, 0, 87.2), rotation: 1.11, i: 2 },{ position: new BABYLON.Vector3(-236.4, 0, 95.8), rotation: 2.81, i: 1 },{ position: new BABYLON.Vector3(-241.3, 0, 109.7), rotation: 1.75, i: 4 },{ position: new BABYLON.Vector3(-228.6, 0, 105.2), rotation: 0.33, i: 5 },{ position: new BABYLON.Vector3(-215.4, 0, 113.9), rotation: 2.98, i: 1 },{ position: new BABYLON.Vector3(-207.8, 0, 100.5), rotation: 1.27, i: 2 },{ position: new BABYLON.Vector3(-219.2, 0, 92.3), rotation: 2.24, i: 3 },{ position: new BABYLON.Vector3(-231.7, 0, 97.1), rotation: 0.79, i: 4 },{ position: new BABYLON.Vector3(-237.5, 0, 112.4), rotation: 2.66, i: 5 },{ position: new BABYLON.Vector3(-223.9, 0, 115.7), rotation: 1.33, i: 1 },{ position: new BABYLON.Vector3(-213.5, 0, 108.2), rotation: 0.59, i: 2 },{ position: new BABYLON.Vector3(-208.4, 0, 92.7), rotation: 2.49, i: 3 },{ position: new BABYLON.Vector3(-218.6, 0, 89.1), rotation: 0.94, i: 4 },{ position: new BABYLON.Vector3(-229.3, 0, 91.8), rotation: 1.63, i: 5 },{ position: new BABYLON.Vector3(-233.2, 0, 105.6), rotation: 2.88, i: 2 },{ position: new BABYLON.Vector3(-220.1, 0, 110.9), rotation: 0.41, i: 3 },{ position: new BABYLON.Vector3(-210.7, 0, 96.3), rotation: 1.15, i: 1 },{ position: new BABYLON.Vector3(-225.2, 0, 101.6), rotation: 2.22, i: 4 },
     ];
-    var trees = [(await SceneLoader.ImportMeshAsync("", "/models/", "tree1.glb", scene)).meshes[0], (await SceneLoader.ImportMeshAsync("", "/models/", "tree2.glb", scene)).meshes[0], (await SceneLoader.ImportMeshAsync("", "/models/", "tree3.glb", scene)).meshes[0], (await SceneLoader.ImportMeshAsync("", "/models/", "tree4.glb", scene)).meshes[0], (await SceneLoader.ImportMeshAsync("", "/models/", "tree5.glb", scene)).meshes[0]];
+    var trees = [(await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "tree1.glb", scene)).meshes[0], (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "tree2.glb", scene)).meshes[0], (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "tree3.glb", scene)).meshes[0], (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "tree4.glb", scene)).meshes[0], (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "tree5.glb", scene)).meshes[0]];
     treePositions.forEach((treePosition, index) => {
         let tree = trees[treePosition.i - 1].clone("tree" + index);
         tree.position = treePosition.position;
@@ -610,7 +610,7 @@ async function createScene(engine) {
         { position: new BABYLON.Vector3(-251.61, 0, 83.79), rotation: Math.PI*0.5 }
 
     ];
-    var lamp = (await SceneLoader.ImportMeshAsync("", "/models/", "lamp.glb", scene)).meshes[0];
+    var lamp = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "lamp.glb", scene)).meshes[0];
     lamp.scaling = new BABYLON.Vector3(1,1.2,1);
     lamp.rotationQuaternion = false;
     var lampConeMaterial=new BABYLON.StandardMaterial("lampConeMat", scene);
@@ -688,7 +688,7 @@ async function createScene(engine) {
         {position : new BABYLON.Vector3(-239.1,0,57.99), rotationQ: 290.3},
         {position : new BABYLON.Vector3(-252.25,0,137.58), rotationQ: 52.4}
     ];
-    var bench = (await SceneLoader.ImportMeshAsync("", "/models/", "bench.glb", scene)).meshes[0];
+    var bench = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "bench.glb", scene)).meshes[0];
     bench.rotationQuaternion = null;
     benchPositions.forEach((benchPosition, index) => {
         let benchClone = bench.clone("bench" + index);
@@ -711,12 +711,12 @@ async function createScene(engine) {
     bench.dispose();
     progressBar.style.width = "50%"; //MAJ PROGRESS BAR
     ///////////////////////////////////// BED
-    var bedInUse = (await SceneLoader.ImportMeshAsync("", "/models/", "bedInUse.glb", scene)).meshes;
+    var bedInUse = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "bedInUse.glb", scene)).meshes;
     var bedInUse_root = bedInUse[0];
     bedInUse.forEach(mesh => {
         mesh.isVisible = false;
     });
-    var bed = (await SceneLoader.ImportMeshAsync("", "/models/", "bed.glb", scene)).meshes;
+    var bed = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "bed.glb", scene)).meshes;
     var z_letter = (await SceneLoader.ImportMeshAsync("", "/models/", "z.glb", scene)).meshes[1];
     var zLetters = [z_letter, z_letter.clone("z_letter2"), z_letter.clone("z_letter3")];
     zLetters.forEach((zLetter,index) => {
@@ -785,12 +785,12 @@ async function createScene(engine) {
     });
     progressBar.style.width = "56%"; //MAJ PROGRESS BAR
     ///////////////////////////////ARTEFACTS (+ positions socle portail)
-    var bridgePortalMeshes = (await SceneLoader.ImportMeshAsync("", "/models/", "bridgePortal.glb", scene)).meshes;
+    var bridgePortalMeshes = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "bridgePortal.glb", scene)).meshes;
     bridgePortalMeshes.forEach(mesh => {
         mesh.visibility = 0;
     });
     var portalCreated = false;
-    var portal = (await SceneLoader.ImportMeshAsync("", "/models/", "portalEnd.glb", scene));     
+    var portal = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "portalEnd.glb", scene));     
     portal.meshes[0].position = new BABYLON.Vector3(0, 0, -100); 
     portal.meshes[0].rotationQuaternion = null;
     portal.meshes[0].rotation.y = Math.PI / 2;
@@ -817,7 +817,7 @@ async function createScene(engine) {
         { position: new BABYLON.Vector3(17.26,3.6,-89.51), color: "#FF00FF"},
         { position: new BABYLON.Vector3(9.76,3.6,-82.31), color: "#FFC0CB"}
     ]
-    var artefact = (await SceneLoader.ImportMeshAsync("", "/models/", "artefact.glb", scene)).meshes[0];
+    var artefact = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "artefact.glb", scene)).meshes[0];
     artefact.rotationQuaternion = null;
     artefact.rotation.x = Math.PI / 2;
     var artefactPositions = [ 
@@ -1205,7 +1205,7 @@ async function createScene(engine) {
         portal.material = new BABYLON.StandardMaterial("portalMat", scene);
         portal.material.diffuseTexture = new BABYLON.Texture("./textures/platform.jpg", scene);
         checkMeshes.push(portal);
-        var keysButtonM = (await SceneLoader.ImportMeshAsync("", "/models/", "keysButton.glb", scene)).meshes;
+        var keysButtonM = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "keysButton.glb", scene)).meshes;
         keysButtonM[0].rotationQuaternion = null;
         keysButtonM[0].rotation.y = portal.rotation.y+Math.PI/2;
         keysButtonM[0].position = portal.position.clone().add(new BABYLON.Vector3(1.5*Math.cos(keysButtonM[0].rotation.y), -2, -1.5*Math.sin(keysButtonM[0].rotation.y)));
