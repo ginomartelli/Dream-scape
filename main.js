@@ -1,7 +1,4 @@
-import * as BABYLON from 'babylonjs';
-import { SceneLoader } from "@babylonjs/core/Loading/sceneLoader";
-import "@babylonjs/loaders";
-import { AnimationEvent } from '@babylonjs/core';
+
 // INTERFACESDIV
 const backmenu = document.getElementById("backmenu");
 const canvas = document.getElementById("renderCanvas");
