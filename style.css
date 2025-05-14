@@ -489,7 +489,7 @@ img {
   z-index: 10;
   transition: 0.5s;
   color: white;
-  padding: 2rem;
+  padding: 0.5vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -498,8 +498,12 @@ img {
 #helpUI h2 {
   margin-top: 0.1vh;
   text-align: center;
-  font-size: 2rem;
+  font-size: 3.5vh;
   margin-bottom: 0.2vh;
+}
+#helpUI p {
+  font-size: 2.5vh;
+  margin: 1vh 1.5vh 0 1.5vh ;
 }
 #helpUI .columns {
   display: flex;
@@ -512,7 +516,7 @@ img {
 }
 
 #helpUI .columns > div:last-child {
-  flex: 2; 
+  flex: 2.5; 
 }
 #helpUI .footer {
   text-align: center;
