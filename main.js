@@ -717,7 +717,7 @@ async function createScene(engine) {
         mesh.isVisible = false;
     });
     var bed = (await BABYLON.SceneLoader.ImportMeshAsync("", "./models/", "bed.glb", scene)).meshes;
-    var z_letter = (await SceneLoader.ImportMeshAsync("", "./models/", "z.glb", scene)).meshes[1];
+    var z_letter = (await BABYLON.SceneLoader.ImportMeshAsync("", "./models/", "z.glb", scene)).meshes[1];
     var zLetters = [z_letter, z_letter.clone("z_letter2"), z_letter.clone("z_letter3")];
     zLetters.forEach((zLetter,index) => {
         zLetter.isVisible = false;
