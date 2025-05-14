@@ -429,7 +429,7 @@ async function createScene(engine) {
     idleAnim.stop();
     var jumpTargAnim = jumpAnim.targetedAnimations[0].animation;
     var firstJump=true;
-    const fall = new AnimationEvent( 1,
+    const fall = new BABYLON.AnimationEvent( 1,
         () => {
             if (firstJump) {
                 firstJump = false;
