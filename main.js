@@ -282,9 +282,11 @@ async function createScene(engine) {
     scene.onAfterRenderObservable.add(function () {
         fps = engine.getFps();
     });
-    var camera = new BABYLON.FollowCamera("camera", new BABYLON.Vector3(0, 10, -10), scene);
-    camera.radius = 25; 
-    camera.heightOffset = 3;
+    const camera = new BABYLON.ArcRotateCamera("arcCam",
+        Math.PI / 2, Math.PI / 4, 25,
+        new BABYLON.Vector3(0, 0, 0),
+        scene   
+    );   
     var camera_free = new BABYLON.FreeCamera("camera_free", new BABYLON.Vector3(0, 10, 0), scene);
     scene.activeCamera = camera;
     ////////////////////////////////////// IMPORT WORLD
@@ -1767,50 +1769,32 @@ async function createScene(engine) {
     ////////////////////////////// BOUCLE MOUVEMENT PLAYER 
     scene.onBeforeRenderObservable.add(() => {
         if(is_playing){
-            let forward = new BABYLON.Vector3(Math.sin(camera.rotation.y), 0, Math.cos(camera.rotation.y));
-            let right = new BABYLON.Vector3(Math.sin(camera.rotation.y + Math.PI / 2), 0, Math.cos(camera.rotation.y + Math.PI / 2));
+            let rotationY = -camera.alpha-Math.PI/2;
+            let forward = new BABYLON.Vector3(Math.sin(rotationY), 0, Math.cos(rotationY));
+            let right = new BABYLON.Vector3(Math.sin(rotationY + Math.PI / 2), 0, Math.cos(rotationY + Math.PI / 2));
             let movement = new BABYLON.Vector3(0, 0, 0);
             let gravity = new BABYLON.Vector3(0, -10/fps, 0);
             if(document.pointerLockElement === canvas){
                 if (keys.z && keys.q) {
-                    movement.addInPlace(forward.scale(10 / fps).add(right.scale(-10 / fps)));
-                    player.meshes.forEach(mesh => {
-                        mesh.rotation.z = Math.PI * 3 / 4 + camera.rotationOffset / 180 * Math.PI;
-                    });
+                    movement.addInPlace(forward.scale(10 / fps).add(right.scale(-10 / fps)).scale(0.707));
                 } else if (keys.z && keys.d) {
-                    movement.addInPlace(forward.scale(10 / fps).add(right.scale(10 / fps)));
-                    player.meshes.forEach(mesh => {
-                        mesh.rotation.z = -Math.PI * 3 / 4 + camera.rotationOffset / 180 * Math.PI;
-                    });
+                    movement.addInPlace(forward.scale(10 / fps).add(right.scale(10 / fps)).scale(0.707));
                 } else if (keys.s && keys.q) {
-                    movement.addInPlace(forward.scale(-10 / fps).add(right.scale(-10 / fps)));
-                    player.meshes.forEach(mesh => {
-                        mesh.rotation.z = Math.PI / 4 + camera.rotationOffset / 180 * Math.PI;
-                    });
+                    movement.addInPlace(forward.scale(-10 / fps).add(right.scale(-10 / fps)).scale(0.707));
                 } else if (keys.s && keys.d) {
-                    movement.addInPlace(forward.scale(-10 / fps).add(right.scale(10 / fps)));
-                    player.meshes.forEach(mesh => {
-                        mesh.rotation.z = -Math.PI / 4 + camera.rotationOffset / 180 * Math.PI;
-                    });
+                    movement.addInPlace(forward.scale(-10 / fps).add(right.scale(10 / fps)).scale(0.707));
                 } else if (keys.z) {
                     movement.addInPlace(forward.scale(10 / fps));
-                    player.meshes.forEach(mesh => {
-                        mesh.rotation.z = Math.PI + camera.rotationOffset / 180 * Math.PI;
-                    });
                 } else if (keys.s) {
                     movement.addInPlace(forward.scale(-10 / fps));
-                    player.meshes.forEach(mesh => {
-                        mesh.rotation.z = camera.rotationOffset / 180 * Math.PI;
-                    });
                 } else if (keys.q) {
                     movement.addInPlace(right.scale(-10 / fps));
-                    player.meshes.forEach(mesh => {
-                        mesh.rotation.z = Math.PI / 2 + camera.rotationOffset / 180 * Math.PI;
-                    });
                 } else if (keys.d) {
                     movement.addInPlace(right.scale(10 / fps));
+                }
+                if (movement.length() > 0.001) {
                     player.meshes.forEach(mesh => {
-                        mesh.rotation.z = -Math.PI / 2 + camera.rotationOffset / 180 * Math.PI;
+                        mesh.rotation.z = Math.atan2(movement.x, movement.z);
                     });
                 }
                 if (keys.shift){
@@ -1997,11 +1981,11 @@ async function createScene(engine) {
         }
     });
     window.addEventListener("mousemove", (event) => {
-        if (is_playing && game_ready && document.pointerLockElement === canvas || scene.debugLayer.isVisible()&&shifted) {
-            let movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-            let movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
-            camera.rotationOffset += movementX * sensitivity.value;
-            camera.heightOffset += movementY * sensitivity.value;
+        if (is_playing && document.pointerLockElement === canvas || scene.debugLayer.isVisible()&&shifted) {
+            let movementX = event.movementX || 0;
+            let movementY = event.movementY || 0;
+            camera.alpha -= movementX * sensitivity.value/200;
+            camera.beta -= movementY * sensitivity.value/200;
         }
     });
     var tempInvis = new Map();
@@ -2059,8 +2043,10 @@ async function createScene(engine) {
     });
     canvas.addEventListener("wheel", (event) => {
         camera.radius += event.deltaY * 0.1;
-        if (camera.radius < 6) {
-            camera.radius = 6;
+        if (camera.radius < 10) {
+            camera.radius = 10;
+        } else if (camera.radius > 500) {
+            camera.radius = 500;
         }
     });
     ///////////////////////SOUS MENU EVENT : STYLE
