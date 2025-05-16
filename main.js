@@ -476,18 +476,18 @@ async function createScene(engine) {
     var socle = (await BABYLON.SceneLoader.ImportMeshAsync("", "./models/", "socle.glb", scene)).meshes[0];
     socle.scaling = new BABYLON.Vector3(0.45, 0.8, 0.45);
     var checkpointPositions = [
-        { position: new BABYLON.Vector3(-37, 50, -37), color : "#FF0000"},
-        { position: new BABYLON.Vector3(95, 50, 50), color : "#FFA500"}, 
+        { position: new BABYLON.Vector3(-37, 50, -37), color :"#7FFF00"},
+        { position: new BABYLON.Vector3(95, 50, 50), color : "#00FF7F"}, 
         { position: new BABYLON.Vector3(200, 70, 100), color : "#FFFF00"}, 
-        { position: new BABYLON.Vector3(107,52,-86),color : "#7FFF00"}, 
+        { position: new BABYLON.Vector3(107,52,-86),color : "#FFFF00"}, 
         { position: new BABYLON.Vector3(-168, 65, -25), color : "#00FF00"}, 
-        { position: new BABYLON.Vector3(70,78,114), color : "#00FF7F"},
-        { position: new BABYLON.Vector3(34,50,274), color : "#00FFFF" },
-        { position: new BABYLON.Vector3(256.4,57.34,-169.5), color : "#007FFF"}, 
-        { position: new BABYLON.Vector3(187.56,50,-150), color : "#0000FF"}, 
+        { position: new BABYLON.Vector3(70,78,114), color : "#007FFF"},
+        { position: new BABYLON.Vector3(34,50,274), color : "#0000FF" },
+        { position: new BABYLON.Vector3(256.4,57.34,-169.5), color : "#FF0000"}, 
+        { position: new BABYLON.Vector3(187.56,50,-150), color : "#FFA500"}, 
         { position: new BABYLON.Vector3(-22,80,274), color : "#8B00FF"},
         { position: new BABYLON.Vector3(-165, 127, 165), color : "#FF00FF"}, 
-        { position: new BABYLON.Vector3(-220, 94.8, 100), color : "#FFC0CB"}, 
+        { position: new BABYLON.Vector3(-220, 94.8, 100), color : "#FFC0CB"},
     ];
     var checkpointList = [];
     var PosCurrentCheckpoint = new BABYLON.Vector3(0, 50, 0);
