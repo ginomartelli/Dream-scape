@@ -675,7 +675,7 @@ async function createScene(engine) {
         {position : new BABYLON.Vector3(252.35,7.34,-169.25), rotationQ: 9.79 },
         {position : new BABYLON.Vector3(-171.87,15,-33.22), rotationQ: 117.7},
         {position : new BABYLON.Vector3(-160.86,15,-20), rotationQ: -31.9},
-        {position : new BABYLON.Vector3(-94.86,21,92.42), rotationQ: -31.9},
+        {position : new BABYLON.Vector3(-94.86,21,-92.42), rotationQ: -31.9},
         {position : new BABYLON.Vector3(-126.56,2,-41.337), rotationQ: 137.7},
         {position : new BABYLON.Vector3(200,20,78.6), rotationQ: 270},
         {position : new BABYLON.Vector3(65.38,28,109.58), rotationQ: -41.9},
@@ -1828,34 +1828,48 @@ async function createScene(engine) {
                 keys.space = false;
                 keys.shift = false;
             }
-            let rayLength = player_root.ellipsoid.y + 0.5;
-            let ray = new BABYLON.Ray(player_root.position, new BABYLON.Vector3(0, -1, 0), rayLength);
-            let hit = scene.pickWithRay(ray, (mesh) => checkMeshes.includes(mesh));
             delay_sound++;
-            if (hit.hit&&player_root.position.y - hit.pickedPoint.y<= 0.15) {
-                if(hit.pickedMesh.name.includes("ground")){
-                    onGrass=true;
-                }else{
-                    onGrass=false;
-                }
-                jumpVelocity = 0;
-                if((isJumping||onFall)&&delay_sound>1000/fps) {
-                    jumpSound.play(0,1.3,0.3);
-                    delay_sound = 0;
-                }
-                fallSound.stop();
-                isJumping = false;
-                firstJump=true;
-                is_falling=false;
-                onFall=false;
-                if (keys.space){
-                    isJumping = true;
-                    if(!jumpSound.isPlaying){
-                        jumpSound.play(0,1.15,1);
+            var onGround = false;
+            let rayLength = player_root.ellipsoid.y + 0.5;
+            const offsets = [
+            new BABYLON.Vector3(0.8, 0,  0.8),
+            new BABYLON.Vector3(-0.8, 0, 0.8),
+            new BABYLON.Vector3(0.8, 0, -0.8),
+            new BABYLON.Vector3(-0.8, 0, -0.8),
+            new BABYLON.Vector3(0, 0, 0),
+            ];
+            for (let offset of offsets) {
+                let origin = player_root.position.add(offset);
+                let ray = new BABYLON.Ray(origin, BABYLON.Vector3.Down(), rayLength);
+                let hit = scene.pickWithRay(ray, mesh => checkMeshes.includes(mesh));
+                if (hit.hit&&player_root.position.y - hit.pickedPoint.y<= 0.15) {
+                    onGround = true;
+                    if(hit.pickedMesh.name.includes("ground")){
+                        onGrass=true;
+                    }else{
+                        onGrass=false;
                     }
-                    jumpVelocity = jumpSpeed;
+                    jumpVelocity = 0;
+                    if((isJumping||onFall)&&delay_sound>1000/fps) {
+                        jumpSound.play(0,1.3,0.3);
+                        delay_sound = 0;
+                    }
+                    fallSound.stop();
+                    isJumping = false;
+                    firstJump=true;
+                    is_falling=false;
+                    onFall=false;
+                    if (keys.space){
+                        isJumping = true;
+                        if(!jumpSound.isPlaying){
+                            jumpSound.play(0,1.15,1);
+                        }
+                        jumpVelocity = jumpSpeed;
+                    }
+                    break;
                 }
-            } else {
+            }
+            if(!onGround) {
                 movement.addInPlace(gravity);
                 if(!isJumping) {
                     onFall=true;
