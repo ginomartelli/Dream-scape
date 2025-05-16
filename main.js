@@ -1,4 +1,4 @@
-
+//Made by Martelli Gino
 // INTERFACESDIV
 const backmenu = document.getElementById("backmenu");
 const canvas = document.getElementById("renderCanvas");
@@ -288,6 +288,10 @@ async function createScene(engine) {
         scene   
     );   
     var camera_free = new BABYLON.FreeCamera("camera_free", new BABYLON.Vector3(0, 10, 0), scene);
+    var camera_anim = new BABYLON.FollowCamera("camera_anim", new BABYLON.Vector3(0, 10, 0), scene);
+    camera_anim.radius = 20;
+    camera_anim.heightOffset = 3;
+    camera_anim.maxCameraSpeed = 50;
     scene.activeCamera = camera;
     ////////////////////////////////////// IMPORT WORLD
     var checkMeshes = [];
@@ -451,6 +455,7 @@ async function createScene(engine) {
     var stoneWalkSound = new BABYLON.Sound("stone", "sounds/stoneWalk.mp3", scene, null, { loop: true, autoplay: false, volume:0.08*volume.value ,spatialSound: true, maxDistance: 100, rolloffFactor: 1});
     grassWalkSound.attachToMesh(player_root);
     stoneWalkSound.attachToMesh(player_root);
+    progressBar.style.width = "27%"; //MAJ PROGRESS BAR
     var bedSound = new BABYLON.Sound("bed", "sounds/bed.mp3", scene, null, { loop: true, autoplay: false, volume:0.06*volume.value ,spatialSound: true, maxDistance: 100, rolloffFactor: 1});
     bedSound.attachToMesh(player_root);
     var buttonPressedSound = new BABYLON.Sound("buttonPressed", "sounds/buttonPressed.mp3", scene, null, { loop: false, autoplay: false, volume:0.02*volume.value,spatialSound: true, maxDistance: 100, rolloffFactor: 1 });
@@ -460,12 +465,13 @@ async function createScene(engine) {
     var winSound = new BABYLON.Sound("end", "sounds/win.mp3", scene, null, { loop: false, autoplay: false, volume:0.016*volume.value });
     var successSound = new BABYLON.Sound("success", "sounds/success.mp3", scene, null, { loop: false, autoplay: false, volume:0.016*volume.value });
     var errorSound = new BABYLON.Sound("error", "sounds/error.mp3", scene, null, { loop: false, autoplay: false, volume:0.014*volume.value });
-    var magicIdleSound = new BABYLON.Sound("magicIdle", "sounds/magicIdle.mp3", scene, null, { loop: true, autoplay: false, volume:0.001*volume.value,spatialSound: true, maxDistance: 100, rolloffFactor: 1 });
+    var magicIdleSound = new BABYLON.Sound("magicIdle", "sounds/magicIdle.mp3", scene, null, { loop: true, autoplay: false, volume:0.001*volume.value,spatialSound: true, maxDistance: 50, rolloffFactor: 1 });
+    var magicIdleSound2 = new BABYLON.Sound("magicIdle2", "sounds/magicIdle.mp3", scene, null, { loop: true, autoplay: false, volume:0.01*volume.value,spatialSound: true, maxDistance: 500, rolloffFactor: 1 });
     var magicalsEffectsSound = new BABYLON.Sound("magicalEffects", "sounds/magicalEffects.mp3", scene, null, { loop: false, autoplay: false, volume:0.01*volume.value });
     var fallSound = new BABYLON.Sound("fall", "sounds/fall.mp3", scene, null, { loop: false, autoplay: false, volume:0.05*volume.value,spatialSound: true, maxDistance: 150, rolloffFactor: 1 });
     fallSound.attachToMesh(player_root);
     var looseSound = new BABYLON.Sound("loose", "sounds/loose.mp3", scene, null, { loop: false, autoplay: false, volume:0.005*volume.value });
-    progressBar.style.width = "28%"; //MAJ PROGRESS BAR
+    progressBar.style.width = "32%"; //MAJ PROGRESS BAR
     ///////////////////////////// CREATE CKECKPOINTS
     var socle = (await BABYLON.SceneLoader.ImportMeshAsync("", "./models/", "socle.glb", scene)).meshes[0];
     socle.scaling = new BABYLON.Vector3(0.45, 0.8, 0.45);
@@ -555,7 +561,7 @@ async function createScene(engine) {
         };
         scene.onBeforeRenderObservable.add(checkpointCallback);
     });
-    progressBar.style.width = "34%"; //MAJ PROGRESS BAR
+    progressBar.style.width = "38%"; //MAJ PROGRESS BAR
     ///////////////////////////////////////// CREATE TREES
     var box_tree = BABYLON.MeshBuilder.CreateCylinder("box_tree", { diameter: 1.5, height: 12.5}, scene);
     box_tree.isVisible = false;
@@ -582,7 +588,7 @@ async function createScene(engine) {
     trees.forEach((tree) => {
         tree.dispose();
     });
-    progressBar.style.width = "40%"; //MAJ PROGRESS BAR
+    progressBar.style.width = "43%"; //MAJ PROGRESS BAR
     // CREATE LAMPS
     var lampPositions = [
         { position: new BABYLON.Vector3(-10.073, 0, -7.731), rotation: 0 },
@@ -653,7 +659,7 @@ async function createScene(engine) {
         checkMeshes.push(lamp_box);
     });
     lamp.dispose();
-    progressBar.style.width = "46%"; //MAJ PROGRESS BAR
+    progressBar.style.width = "47%"; //MAJ PROGRESS BAR
     // CREATE BENCHES
     var benchPositions = [
         { position: new BABYLON.Vector3(-16,0,-8), rotationQ: -96 },
@@ -838,7 +844,7 @@ async function createScene(engine) {
         { position: new BABYLON.Vector3(275.5,6,-85.9), color: "#007FFF" }, 
         { position: new BABYLON.Vector3(76,35,-160), color: "#0000FF" }, 
         { position: new BABYLON.Vector3(-30,32,234), color: "#8B00FF" }, 
-        { position: new BABYLON.Vector3(-191,2,135), color: "#FF00FF" }, 
+        { position: new BABYLON.Vector3(-0.48,4,61,72), color: "#FF00FF" }, 
         { position: new BABYLON.Vector3(-180, 46.8, 100), color: "#FFC0CB" }
     ];
     const glowLayerArtefact = new BABYLON.GlowLayer("glow", scene);
@@ -900,7 +906,7 @@ async function createScene(engine) {
         scene.onAfterRenderObservable.add(() => {
             if(triggered && !endAnim) {
                 var direction =new BABYLON.Vector3(0, 0, -100).subtract(artefactClone.position).normalize();
-                camera.rotationOffset = Math.atan2(direction.x, direction.z)*180/Math.PI;
+                camera_anim.rotationOffset = Math.atan2(direction.x, direction.z)*180/Math.PI;
             }
             if (player_body.intersectsMesh(artefactClone, false)&&!triggered&&!portalCreated) {
                 triggered = true;
@@ -915,23 +921,24 @@ async function createScene(engine) {
                     { frame: 30, value: soclePositions.find(socle => socle.color === artefactPosition.color).position }
                 ]; 
                 if(allFound==12){
-                    var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, scene.activeCamera, portal.meshes[2], 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, scene.getEngine(), false); 
+                    var godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera_anim, portal.meshes[2], 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, scene.getEngine(), false); 
                     highlightLayerCheckpoint.addMesh(portal.meshes[2], new BABYLON.Color3(1,1,1));
                     portalCreated = true;
                 }
                 moveAnimation.setKeys(moveKeys);
                 moveAnimation.setEasingFunction(easingFunc);
                 artefactClone.animations = [moveAnimation];
-                camera.lockedTarget = artefactClone;
-                camera.radius = 40;
-                camera.heightOffset = 10;
+                camera_anim.lockedTarget = artefactClone;
+                camera_anim.radius = 40;
+                camera_anim.heightOffset = 10;
+                scene.activeCamera = camera_anim;
                 scene.beginAnimation(artefactClone, 0, 30, false, 1, () => {
                     endAnim = true;
                     var direction =new BABYLON.Vector3(0, 0, -100).subtract(artefactClone.position).normalize();
-                    camera.rotationOffset = Math.atan2(direction.x, direction.z)*180/Math.PI;
+                    camera_anim.rotationOffset = Math.atan2(direction.x, direction.z)*180/Math.PI;
                     setTimeout(() => {
                         if(!portalCreated){
-                            camera.lockedTarget = player_root;
+                            scene.activeCamera = camera;
                         } else {
                             NoSeeThrough.push(bridgePortalMeshes[1]);
                             var bridgePortal = bridgePortalMeshes[0];
@@ -971,34 +978,41 @@ async function createScene(engine) {
                             var tempBlock = new BABYLON.MeshBuilder.CreateBox("tempBlock", { width: 1, height: 1, depth: 1 }, scene);
                             tempBlock.position = new BABYLON.Vector3(-0.2,3.6,-79.86);
                             tempBlock.isVisible = false;
-                            camera.lockedTarget = tempBlock;
-                            camera.radius = 90;
-                            camera.heightOffset = 10;
-                            camera.rotationOffset = 0;
+                            camera_anim.lockedTarget = tempBlock;
+                            camera_anim.radius = 90;
+                            camera_anim.heightOffset = 10;
+                            camera_anim.rotationOffset = 0;
                             magicalsEffectsSound.play(0,11,3);
                             bridgePortalMeshes.forEach(mesh => {
                                 mesh.animations = [animY, animFade];
-                                scene.beginAnimation(mesh, 0, 15, false,0.5, () => {
+                                scene.beginAnimation(mesh, 0, 15, false,0.33, () => {
                                     setTimeout(() => {
-                                        camera.fov = 1.2;
-                                        camera.radius = 50;
-                                        camera.lockedTarget = planePortal;
+                                        camera_anim.fov = 1.2;
+                                        camera_anim.radius = 50;
+                                        camera_anim.lockedTarget = planePortal;
                                         tempBlock.dispose();
-                                        camera.heightOffset = 8;
-                                        camera.rotationOffset = 90;
+                                        camera_anim.heightOffset = 8;
+                                        camera_anim.rotationOffset = 90;
                                         planePortal.isVisible = true;
                                         magicalsEffectsSound.play(0,1.8,4.2);
-                                        magicIdleSound.maxDistance=400;
-                                        magicIdleSound.attachToMesh(planePortal);
-                                        magicIdleSound.play(0,4,20);
-                                        magicIdleSound.setVolume(0.015*volume.value);
+                                        magicIdleSound2.attachToMesh(planePortal);
+                                        magicIdleSound2.play(0,4,21);
                                         setTimeout(() => {
-                                            camera.lockedTarget = player_root;
+                                            scene.activeCamera = camera;
                                             if(simonsIteration==0){
                                                 createSimonsSays(scene, new BABYLON.Vector3(0,0,-7), new BABYLON.Vector3(0,0,-24), 8);
+                                                scene.meshes.forEach(mesh => {
+                                                    if(!mesh.checkCollisions&&mesh.name.includes("portal")){
+                                                        mesh.checkCollisions = true;
+                                                        checkMeshes.push(mesh);
+                                                    }
+                                                });
                                             }
                                             simonsIteration++;
                                             camera.fov = 0.8;
+                                            godrays.dispose(camera_anim);
+                                            camera_anim.dispose();
+                                            godrays = new BABYLON.VolumetricLightScatteringPostProcess('godrays', 1.0, camera, portal.meshes[2], 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, scene.getEngine(), false); 
                                         }, 3000);
                                     }, 1800);
                                 });
@@ -1021,9 +1035,10 @@ async function createScene(engine) {
             let distanceToPortal = BABYLON.Vector3.Distance(player_root.position, new BABYLON.Vector3(0, 0, -100));
             if (distanceToPortal < 100) {
                 camera.fov = 0.8+(100-distanceToPortal) * 0.01;
-                camera.radius = 7+distanceToPortal * 0.5;
+                camera.radius = 14+distanceToPortal * 0.5;
                 if(player_root.intersectsMesh(boxPlanePortal, false)){
                     player_root.position = new BABYLON.Vector3(0, 0, 0);
+                    magicIdleSound2.stop();
                     endDiv.classList.remove("hidden");
                     winSound.play();
                     in_pause = true;
@@ -1384,8 +1399,6 @@ async function createScene(engine) {
             platform.material = platLaserMat;
             checkMeshes.push(platform);
         });
-        const glowLayer = new BABYLON.GlowLayer("glowLASER", scene);
-        glowLayer.intensity = 0.8;
         laserConfigs.forEach((config, index) => {
             const laserMesh = BABYLON.MeshBuilder.CreateBox("laserMesh", {
                 width: config.axis === "x" ? 15 : 0.05,
@@ -1396,7 +1409,7 @@ async function createScene(engine) {
             laserMesh.material.emissiveColor = new BABYLON.Color3(1, 0, 0);
             laserMesh.material.alpha = 0.9;
             laserMesh.disableLighting = true;
-            glowLayer.addIncludedOnlyMesh(laserMesh);
+            highlightLayerCheckpoint.addMesh(laserMesh, new BABYLON.Color3(1, 0, 0));
             laserMesh.position = config.position.clone();
             const originalPos = config.position.clone();
             const targetPos = originalPos.add(config.direction.clone());
@@ -2042,7 +2055,7 @@ async function createScene(engine) {
         }
     });
     canvas.addEventListener("wheel", (event) => {
-        camera.radius += event.deltaY * 0.1;
+        camera.radius += event.deltaY * 0.08;
         if (camera.radius < 10) {
             camera.radius = 10;
         } else if (camera.radius > 500) {
