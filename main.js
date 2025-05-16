@@ -155,7 +155,7 @@ buttonReplay.addEventListener('click', function() {
 });
 //LOOSE//PAUSES MENU ET TIMER
 var DuringTime = 0; // secondes
-var timer = "20:01";
+var timer = "30:01";
 var in_pause = false;
 const timerPause = document.getElementById("timerPause");
 const timerResult = document.getElementById("timerResult");
@@ -465,6 +465,8 @@ async function createScene(engine) {
     var looseSound = new BABYLON.Sound("loose", "sounds/loose.mp3", scene, null, { loop: false, autoplay: false, volume:0.005*volume.value });
     progressBar.style.width = "28%"; //MAJ PROGRESS BAR
     ///////////////////////////// CREATE CKECKPOINTS
+    var socle = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "socle.glb", scene)).meshes[0];
+    socle.scaling = new BABYLON.Vector3(0.45, 0.8, 0.45);
     var checkpointPositions = [
         { position: new BABYLON.Vector3(-37, 50, -37), color : "#FF0000"},
         { position: new BABYLON.Vector3(95, 50, 50), color : "#FFA500"}, 
@@ -483,6 +485,7 @@ async function createScene(engine) {
     var PosCurrentCheckpoint = new BABYLON.Vector3(0, 50, 0);
     var checkpoint1 = BABYLON.MeshBuilder.CreateCylinder("checkpoint1", { diameter: 4, height: 100 }, scene);
     checkpoint1.position = checkpointPositions[0].position;
+    socle.position = new BABYLON.Vector3(checkpointPositions[0].position.x, checkpointPositions[0].position.y - 50, checkpointPositions[0].position.z);
     checkpoint1.visibility = 0.1;
     checkpoint1.material = new BABYLON.StandardMaterial("checkpoint1Mat", scene);
     checkpoint1.material.emissiveColor = new BABYLON.Color3.FromHexString(checkpointPositions[0].color);
@@ -493,6 +496,8 @@ async function createScene(engine) {
         if(index === 0) return;
         let checkpoint = checkpoint1.clone("checkpoint" + (index + 1));
         checkpoint.position = checkpointPosition.position;
+        let socleClone = socle.clone("socle" + (index + 1));
+        socleClone.position = new BABYLON.Vector3(checkpointPosition.position.x, checkpointPosition.position.y - 50, checkpointPosition.position.z);
         checkpoint.material = new BABYLON.StandardMaterial(`checkpoint${index + 1}Mat`, scene);
         checkpoint.material.diffuseColor = new BABYLON.Color3.FromHexString(checkpointPosition.color);
         checkpoint.material.emissiveColor = new BABYLON.Color3.FromHexString(checkpointPosition.color);
