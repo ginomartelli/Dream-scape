@@ -465,7 +465,7 @@ async function createScene(engine) {
     var looseSound = new BABYLON.Sound("loose", "sounds/loose.mp3", scene, null, { loop: false, autoplay: false, volume:0.005*volume.value });
     progressBar.style.width = "28%"; //MAJ PROGRESS BAR
     ///////////////////////////// CREATE CKECKPOINTS
-    var socle = (await BABYLON.SceneLoader.ImportMeshAsync("", "/models/", "socle.glb", scene)).meshes[0];
+    var socle = (await BABYLON.SceneLoader.ImportMeshAsync("", "./models/", "socle.glb", scene)).meshes[0];
     socle.scaling = new BABYLON.Vector3(0.45, 0.8, 0.45);
     var checkpointPositions = [
         { position: new BABYLON.Vector3(-37, 50, -37), color : "#FF0000"},
