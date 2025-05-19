@@ -505,19 +505,6 @@ img {
   font-size: 2.5vh;
   margin: 1vh 1.5vh 0 1.5vh ;
 }
-#helpUI .columns {
-  display: flex;
-  justify-content: space-around;
-  gap: 2vh;
-}
-
-#helpUI .columns > div:first-child {
-  flex: 1; 
-}
-
-#helpUI .columns > div:last-child {
-  flex: 2; 
-}
 #helpUI .footer {
   text-align: center;
   font-size: 1rem;
