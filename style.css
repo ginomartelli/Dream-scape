@@ -482,10 +482,10 @@ img {
   position: absolute;
   border-radius: 1vw;
   top: 10vh;
-  left: 20vw;
-  width: 60vw;
+  left: 10vw;
+  width: 80vw;
   height: min-content;
-  background-color: #191825d8;
+  background-color: #191825;
   z-index: 10;
   transition: 0.5s;
   color: white;
@@ -516,7 +516,7 @@ img {
 }
 
 #helpUI .columns > div:last-child {
-  flex: 2.5; 
+  flex: 2; 
 }
 #helpUI .footer {
   text-align: center;
