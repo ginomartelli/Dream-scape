@@ -482,8 +482,8 @@ img {
   position: absolute;
   border-radius: 1vw;
   top: 10vh;
-  left: 10vw;
-  width: 80vw;
+  left: 15vw;
+  width: 70vw;
   height: min-content;
   background-color: #191825;
   z-index: 10;
