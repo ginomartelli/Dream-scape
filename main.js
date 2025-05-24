@@ -1082,7 +1082,7 @@ async function createScene(engine) {
     function createInvisParkour(scene, platformPositions, buttonPosition, visibleTime = 5000) {
         const platforms = platformPositions.map(pos => {
             const box = BABYLON.MeshBuilder.CreateBox("parkourBox", { height:0.5,width:4,depth:4,faceUV:faceUV}, scene);
-            box.position = new BABYLON.Vector3(pos.x, pos.y - 4, pos.z); // commence plus bas
+            box.position = new BABYLON.Vector3(pos.x, pos.y - 4, pos.z); 
             box.visibility = 0;
             box.checkCollisions = false; 
             box.material = platInvisMat;
@@ -1092,20 +1092,16 @@ async function createScene(engine) {
         buttonParkour.position = buttonPosition;
         buttonParkour.material = buttInvisMat;
         let triggered = false;
-        let platformTimers = []; // Liste des timers pour faire apparaître ou disparaître chaque plateforme
-        let hideTimer = null; // Timer pour commencer à cacher les plateformes
+        let platformTimers = []; 
+        let hideTimer = null; 
         let buttonCooldown = false;
-        
         scene.onBeforeRenderObservable.add(() => {
-            const deltaTime = scene.getEngine().getDeltaTime(); // en ms
-
+            const deltaTime = scene.getEngine().getDeltaTime(); 
             if (!triggered && player_root.intersectsMesh(buttonParkour, false)) {
                 buttonParkour.position.y = buttonPosition.y - 0.2;
                 buttonPressedSound.play(0, 0.9);
                 triggered = true;
                 buttonCooldown = true;
-        
-                // Réinitialise les timers
                 platformTimers = [];
                 platforms.forEach((platform, i) => {
                     platform.visibility = 0;
@@ -1117,48 +1113,36 @@ async function createScene(engine) {
                         state: "appear"
                     });
                 });
-        
-                // Démarre le timer global pour cacher plus tard
                 hideTimer = {
                     time: 0,
                     delay: visibleTime
                 };
             }
-        
-            // Gestion de l'apparition progressive des plateformes
             platformTimers.forEach(timer => {
                 timer.time += deltaTime;
                 if (timer.state === "appear" && timer.time >= timer.delay) {
                     timer.state = "done";
-        
                     const platform = timer.platform;
                     platform.visibility = 1;
-        
                     const animY = new BABYLON.Animation("rise", "position.y", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
                     animY.setKeys([
                         { frame: 0, value: platform.position.y },
                         { frame: 15, value: platformPositions[platforms.indexOf(platform)].y }
                     ]);
-        
                     const animFade = new BABYLON.Animation("fadeIn", "visibility", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
                     animFade.setKeys([
                         { frame: 0, value: 0 },
                         { frame: 15, value: 1 }
                     ]);
-        
                     platform.animations = [animY, animFade];
                     scene.beginAnimation(platform, 0, 15, false);
-        
                     platform.checkCollisions = true;
                     checkMeshes.push(platform);
                 }
             });
-        
-            // Cacher les plateformes après le délai global
             if (hideTimer && triggered) {
                 hideTimer.time += deltaTime;
                 if (hideTimer.time >= hideTimer.delay) {
-                    // Prépare à cacher chaque plateforme avec des délais échelonnés
                     platformTimers = platforms.map((platform, i) => ({
                         platform,
                         delay: i * 400,
@@ -1168,8 +1152,6 @@ async function createScene(engine) {
                     hideTimer = null;
                 }
             }
-        
-            // Gestion de la disparition progressive
             platformTimers.forEach(timer => {
                 if (timer.state !== "hide") return;
                 timer.time += deltaTime;
@@ -1197,12 +1179,11 @@ async function createScene(engine) {
                     platform.checkCollisions = false;
                 }
             });
-        
-            // Remet le bouton en position après tout
-            if (buttonCooldown && platformTimers.every(t => t.state === "done")) {
+            if (buttonCooldown && platformTimers.length > 0 && platformTimers.every(t => t.state === "done")) {
                 buttonParkour.position.y = buttonPosition.y + 0.2;
                 triggered = false;
                 buttonCooldown = false;
+                platformTimers = [];
             }
         });
     }
@@ -1331,18 +1312,18 @@ async function createScene(engine) {
         var inputAccepted = false;
         const resetGame = () => {
             keysButton.forEach((key) => {
-                key.material.emissiveColor = new BABYLON.Color3(1, 0, 0); // Rouge
+                key.material.emissiveColor = new BABYLON.Color3(1, 0, 0); 
             });
             setTimeout(() => {
                 keysButton.forEach((key) => {
-                    key.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5); // Couleur par défaut
+                    key.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5); 
                 });
             }, 200);
             sequence = [];
             extendSequence();
             currentStep = 0;
             isPlaying = true;
-            setTimeout(()=>displaySequence(), 1000); // Délai avant le prochain tour
+            setTimeout(()=>displaySequence(), 1000); 
             inputAccepted = false;
         };
         const checkInput = () => {
@@ -1401,7 +1382,7 @@ async function createScene(engine) {
                     extendSequence();
                     setTimeout(() => {
                         displaySequence();
-                    }, 1000);  // Délai avant le prochain tour
+                    }, 1000);  
                 }else{
                     successSound.play(0,0.732);
                 }
@@ -1410,12 +1391,12 @@ async function createScene(engine) {
                 errorSound.play(0);
                 inputAccepted = true;
                 keys[Object.keys(keys).find(key => keys[key])] = false;
-                keysButton[sequence[currentStep]].material.emissiveColor = new BABYLON.Color3(1, 0, 0); // Rouge
+                keysButton[sequence[currentStep]].material.emissiveColor = new BABYLON.Color3(1, 0, 0); 
                 setTimeout(()=>keysButton[sequence[currentStep]].material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5),500)
                 isPlaying = false;
                 setTimeout(() => {
                     resetGame();
-                }, 500);  // Délai avant le prochain tour
+                }, 500); 
                 return;
             }
         };
