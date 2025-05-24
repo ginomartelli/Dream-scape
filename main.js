@@ -1091,7 +1091,6 @@ async function createScene(engine) {
         const buttonParkour = BABYLON.MeshBuilder.CreateBox("parkourButton", { height:0.5,width:4,depth:4,faceUV:faceUV }, scene);
         buttonParkour.position = buttonPosition;
         buttonParkour.material = buttInvisMat;
-        let triggered = false; // pour éviter les déclenchements multiples
         let triggered = false;
         let platformTimers = []; // Liste des timers pour faire apparaître ou disparaître chaque plateforme
         let hideTimer = null; // Timer pour commencer à cacher les plateformes
