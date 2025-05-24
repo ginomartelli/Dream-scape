@@ -1092,67 +1092,118 @@ async function createScene(engine) {
         buttonParkour.position = buttonPosition;
         buttonParkour.material = buttInvisMat;
         let triggered = false; // pour éviter les déclenchements multiples
-        scene.onAfterRenderObservable.add(() => {
+        let triggered = false;
+        let platformTimers = []; // Liste des timers pour faire apparaître ou disparaître chaque plateforme
+        let hideTimer = null; // Timer pour commencer à cacher les plateformes
+        let buttonCooldown = false;
+        
+        scene.onBeforeRenderObservable.add(() => {
+            const deltaTime = scene.getEngine().getDeltaTime(); // en ms
+
             if (!triggered && player_root.intersectsMesh(buttonParkour, false)) {
-                buttonParkour.position.y = buttonPosition.y - 0.2; // fait monter le bouton
-                buttonPressedSound.play(0,0.9);
+                buttonParkour.position.y = buttonPosition.y - 0.2;
+                buttonPressedSound.play(0, 0.9);
                 triggered = true;
-                // Animation d’apparition des plateformes
+                buttonCooldown = true;
+        
+                // Réinitialise les timers
+                platformTimers = [];
                 platforms.forEach((platform, i) => {
-                    setTimeout(() => {
-                        platform.visibility = 1;
-                        const animY = new BABYLON.Animation("rise", "position.y", 30,
-                            BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-                            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-                        const keysY = [
-                            { frame: 0, value: platform.position.y },
-                            { frame: 15, value: platformPositions[i].y }
-                        ];
-                        animY.setKeys(keysY);
-                        const animFade = new BABYLON.Animation("fadeIn", "visibility", 30,
-                            BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-                            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-                        const keysFade = [
-                            { frame: 0, value: 0 },
-                            { frame: 15, value: 1 }
-                        ];
-                        animFade.setKeys(keysFade);
-                        platform.animations = [animY, animFade];
-                        scene.beginAnimation(platform, 0, 15, false);
-                        checkMeshes.push(platform);
-                        platform.checkCollisions = true;
-                    }, i * 400);
-                });
-                // Cache les plateformes après un délai
-                setTimeout(() => {
-                    platforms.forEach((platform,i) => {
-                        setTimeout(() => {
-                            const animFadeOut = new BABYLON.Animation("fadeOut", "visibility", 30,
-                                BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-                                BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-                            const keys = [
-                                { frame: 0, value: 1 },
-                                { frame: 15, value: 0 }
-                            ];
-                            animFadeOut.setKeys(keys);
-                            const animYd = new BABYLON.Animation("fall", "position.y", 30,
-                                BABYLON.Animation.ANIMATIONTYPE_FLOAT,
-                                BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-                    
-                            const keysYd = [
-                                { frame: 0, value: platformPositions[i].y },
-                                { frame: 15, value: platform.position.y-4 }
-                            ];
-                            animYd.setKeys(keysYd);
-                            platform.animations = [animFadeOut, animYd];
-                            scene.beginAnimation(platform, 0, 15, false);
-                            checkMeshes.splice(checkMeshes.indexOf(platform), 1); 
-                            platform.checkCollisions = false;
-                        }, i * 400);
+                    platform.visibility = 0;
+                    platform.checkCollisions = false;
+                    platformTimers.push({
+                        platform,
+                        delay: i * 400,
+                        time: 0,
+                        state: "appear"
                     });
-                    buttonParkour.position.y = buttonPosition.y + 0.2;
-                    triggered = false; // permet de réactiver le bouton plus tard si tu veux
-                }, visibleTime);
+                });
+        
+                // Démarre le timer global pour cacher plus tard
+                hideTimer = {
+                    time: 0,
+                    delay: visibleTime
+                };
+            }
+        
+            // Gestion de l'apparition progressive des plateformes
+            platformTimers.forEach(timer => {
+                timer.time += deltaTime;
+                if (timer.state === "appear" && timer.time >= timer.delay) {
+                    timer.state = "done";
+        
+                    const platform = timer.platform;
+                    platform.visibility = 1;
+        
+                    const animY = new BABYLON.Animation("rise", "position.y", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
+                    animY.setKeys([
+                        { frame: 0, value: platform.position.y },
+                        { frame: 15, value: platformPositions[platforms.indexOf(platform)].y }
+                    ]);
+        
+                    const animFade = new BABYLON.Animation("fadeIn", "visibility", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
+                    animFade.setKeys([
+                        { frame: 0, value: 0 },
+                        { frame: 15, value: 1 }
+                    ]);
+        
+                    platform.animations = [animY, animFade];
+                    scene.beginAnimation(platform, 0, 15, false);
+        
+                    platform.checkCollisions = true;
+                    checkMeshes.push(platform);
+                }
+            });
+        
+            // Cacher les plateformes après le délai global
+            if (hideTimer && triggered) {
+                hideTimer.time += deltaTime;
+                if (hideTimer.time >= hideTimer.delay) {
+                    // Prépare à cacher chaque plateforme avec des délais échelonnés
+                    platformTimers = platforms.map((platform, i) => ({
+                        platform,
+                        delay: i * 400,
+                        time: 0,
+                        state: "hide"
+                    }));
+                    hideTimer = null;
+                }
+            }
+        
+            // Gestion de la disparition progressive
+            platformTimers.forEach(timer => {
+                if (timer.state !== "hide") return;
+                timer.time += deltaTime;
+                if (timer.time >= timer.delay) {
+                    timer.state = "done";
+        
+                    const platform = timer.platform;
+        
+                    const animFadeOut = new BABYLON.Animation("fadeOut", "visibility", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
+                    animFadeOut.setKeys([
+                        { frame: 0, value: 1 },
+                        { frame: 15, value: 0 }
+                    ]);
+        
+                    const animYd = new BABYLON.Animation("fall", "position.y", 30, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
+                    animYd.setKeys([
+                        { frame: 0, value: platformPositions[platforms.indexOf(platform)].y },
+                        { frame: 15, value: platform.position.y - 4 }
+                    ]);
+        
+                    platform.animations = [animFadeOut, animYd];
+                    scene.beginAnimation(platform, 0, 15, false);
+        
+                    checkMeshes.splice(checkMeshes.indexOf(platform), 1);
+                    platform.checkCollisions = false;
+                }
+            });
+        
+            // Remet le bouton en position après tout
+            if (buttonCooldown && platformTimers.every(t => t.state === "done")) {
+                buttonParkour.position.y = buttonPosition.y + 0.2;
+                triggered = false;
+                buttonCooldown = false;
             }
         });
     }
