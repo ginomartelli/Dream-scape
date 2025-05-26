@@ -14,15 +14,15 @@ Built with **Babylon.js** and **JavaScript** for the **Games On Web 2025** conte
 
 ## 🧭 TABLE OF CONTENTS
 - ### [🇬🇧 English version](https://github.com/ginomartelli/Dream-scape/blob/main/README.md#-english-version-1)
-  - [🔍 Game Overview](https://github.com/ginomartelli/Dream-scape/blob/main/README.md#-game-overview-1)
-  - [🎮 How to Play](https://github.com/gamesonweb/dreamland-ginomartelli/edit/main/README.md#-how-to-play-)
-  - [⚙ In-Game Menu Options](https://github.com/gamesonweb/dreamland-ginomartelli/edit/main/README.md#-in-game-menu-options)
+  - [🔍 Game Overview](https://github.com/gamesonweb/dreamland-ginomartelli/blob/main/README.md#-game-overview)
+  - [🎮 How to Play](https://github.com/gamesonweb/dreamland-ginomartelli/blob/main/README.md#-how-to-play-)
+  - [⚙ In-Game Menu Options](https://github.com/gamesonweb/dreamland-ginomartelli/blob/main/README.md#-in-game-menu-options)
   - [👥 Team Presentation](http://github.com/ginomartelli/Dream-scape/blob/main/README.md#-team-presentation-1)
 - ### [🇫🇷 Version française](https://github.com/ginomartelli/Dream-scape/blob/main/README.md#-version-fran%C3%A7aise-1)
-  - [🔍 Présentation du Jeu](https://github.com/gamesonweb/dreamland-ginomartelli/edit/main/README.md#-pr%C3%A9sentation-du-jeu)
-  - [🎮 Comment Jouer](https://github.com/gamesonweb/dreamland-ginomartelli/edit/main/README.md#-comment-jouer-)
-  - [⚙ Options Du Menu](https://github.com/gamesonweb/dreamland-ginomartelli/edit/main/README.md#-options-du-menu-en-jeu)
-  - [👥 Présentation de l'équipe](https://github.com/gamesonweb/dreamland-ginomartelli/edit/main/README.md#-team-presentation-1)
+  - [🔍 Présentation du Jeu](https://github.com/gamesonweb/dreamland-ginomartelli/blob/main/README.md#-pr%C3%A9sentation-du-jeu)
+  - [🎮 Comment Jouer](https://github.com/gamesonweb/dreamland-ginomartelli/blob/main/README.md#-comment-jouer-)
+  - [⚙ Options Du Menu](https://github.com/gamesonweb/dreamland-ginomartelli/blob/main/README.md#-options-du-menu-en-jeu)
+  - [👥 Présentation de l'équipe](https://github.com/gamesonweb/dreamland-ginomartelli/blob/main/README.md#-pr%C3%A9sentation-de-l%C3%A9quipe)
 
 ---
 
@@ -133,7 +133,7 @@ Serez-vous assez rapide pour vous réveiller à temps ?
 >Besoin d'aide ? Regardez la [Completion Video](https://youtu.be/XJVGw6Uxr3U)
 
 
-### 👥 Team Presentation  
+### 👥 Présentation de l'équipe
 Nous sommes 3 étudiants de **Polytech Nice Sophia**, actuellement en 1ère année de cycle ingénieur : 
 - **Amy Joseph**: Specialité *Bâtiments Durables et Intelligents*. Apprentie chez Bouygues Bâtiment Sud-Est.
 - **Clarisse Carpentier**: Specialité *Bâtiments Durables et Intelligents*.
