@@ -153,6 +153,27 @@ buttonHelp.addEventListener('click', function() {
 buttonReplay.addEventListener('click', function() {
     window.location.reload();
 });
+
+function isMobile() {
+  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+if (isMobile()) {
+  const warning = document.createElement('div');
+  warning.textContent = "⚠️ Ce jeu n'est pas disponible sur téléphone.";
+  warning.style.position = 'fixed';
+  warning.style.top = '0';
+  warning.style.left = '0';
+  warning.style.width = '100%';
+  warning.style.padding = '15px';
+  warning.style.backgroundColor = '#ffcc00';
+  warning.style.color = '#000';
+  warning.style.fontSize = '18px';
+  warning.style.fontWeight = 'bold';
+  warning.style.textAlign = 'center';
+  warning.style.zIndex = '9999';
+  document.body.appendChild(warning);
+}
+
 //LOOSE//PAUSES MENU ET TIMER
 var DuringTime = 0; // secondes
 var timer = "30:01";
