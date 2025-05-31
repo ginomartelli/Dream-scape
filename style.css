@@ -593,3 +593,8 @@ body {
   height: auto !important;
   line-height: 1.2 !important;
 }
+
+#buttonClimb.buttonText:before,
+#buttonClimb.actif:before {
+    background-image: inherit !important;
+}
